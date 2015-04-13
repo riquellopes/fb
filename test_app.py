@@ -17,7 +17,7 @@ class TestApp(unittest.TestCase):
     @patch('app.db.session.commit')
     def test_1(self, c):
         """
-            Caso o usuário /1 seja recuperado, o nome dele deve ser henrique lopes
+            Caso um cadastro seja realizado, a aplicaçaõ deve recuperar status 201.
         """
         json = '{"username":"henrique", "id":1, "name":"lopes", "gender":"male"}'
         url = self.app.application.config['GRAPH_FB'].format(1)
@@ -28,3 +28,12 @@ class TestApp(unittest.TestCase):
 
         response = self.app.post("/person/", data={"facebookid": 1})
         assert_equals(response.status, '201 CREATED')
+
+    @patch('app.db.session.commit')
+    @patch('app.Person')
+    def test_2(self, c, p):
+        """
+            Caso usuário /1 seja removido, aplicação deve retorna o status 204.
+        """
+        response = self.app.delete("/person/1")
+        assert_equals(response.status, '204 NO CONTENT')
