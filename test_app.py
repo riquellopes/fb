@@ -19,7 +19,7 @@ class TestApp(unittest.TestCase):
         """
             Caso o usuário /1 seja recuperado, o nome dele deve ser henrique lopes
         """
-        json = '{"username":"henrique", "id":1, "name":"lopes", "gender":"man"}'
+        json = '{"username":"henrique", "id":1, "name":"lopes", "gender":"male"}'
         url = self.app.application.config['GRAPH_FB'].format(1)
         responses.add(responses.GET, url,
                       body=json,
