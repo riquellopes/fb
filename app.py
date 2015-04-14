@@ -32,28 +32,37 @@ class Person(db.Model):
 
 @app.route("/person/", methods=['POST'])
 def post():
-    response = requests.get(app.config['GRAPH_FB'].format(request.form.get('facebookid')))
-    json = response.json()
-    p = Person(**{
-        'username': json['username'],
-        'facebookId': json['id'],
-        'name': json['name'],
-        'gender': json['gender']
-    })
-    db.session.add(p)
-    db.session.commit()
+    app.logger.info("Entrando no método post.")
+    try:
+        response = requests.get(app.config['GRAPH_FB'].format(request.form.get('facebookid')))
+        json = response.json()
+        p = Person(**{
+            'username': json['username'],
+            'facebookId': json['id'],
+            'name': json['name'],
+            'gender': json['gender']
+        })
+        db.session.add(p)
+        db.session.commit()
+    except Exception as e:
+        app.logger.error("Error ao processar requisição {}".format(e))
     return "", 201
 
 
 @app.route("/person/<string:id>", methods=['DELETE'])
 def delete(id):
-    Person.query.get(id).query.delete()
-    db.session.commit()
+    app.logger.info("Entrando no método delete /person/{}.".format(id))
+    try:
+        Person.query.get(id).query.delete()
+        db.session.commit()
+    except Exception as e:
+        app.logger.error("Error ao processar requisição {}.".format(e))
     return "", 204
 
 
 @app.route("/person/", methods=['GET'])
 def get():
+    app.logger.info("Entrando no método get /person/.")
     limit = request.args.get('limit', None)
     p = Person.query.filter()
     if limit is not None:
