@@ -54,10 +54,10 @@ def delete(id):
 
 @app.route("/person/", methods=['GET'])
 def get():
-    limit = request.form.get('limit', None)
+    limit = request.args.get('limit', None)
     p = Person.query.filter()
     if limit is not None:
-        p = p[limit]
+        p = p.limit(limit)
     return Response(json.dumps([i.serialize for i in p], indent=2), mimetype='application/json')
 if __name__ == '__main__':
     db.create_all()
