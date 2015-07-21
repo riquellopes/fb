@@ -14,3 +14,7 @@ Recuperar e armazenar informações de usuários do facebook.
 Observações:
 > O desafio é bem simples, existem algumas coisas que poderiam ser implementadas, como por exemplo uma validação para evitar que o mesmo usuário seja importado duas vezes, é possivel visualizar isso apenas pelo log.
 > Eu me ative em implementar apenas o que foi proposto.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/riquellopes/fb/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
