@@ -1,8 +1,6 @@
 # coding: utf-8
 import unittest
 import responses
-# from flask.ext.testing import TestCase
-# from mock import patch
 import json
 from nose.tools import assert_equals
 from app import app, Person, db
