@@ -82,3 +82,6 @@ class TestApp(unittest.TestCase):
         assert_equals(response.status, '200 OK')
         data = json.loads(response.data)
         assert_equals(len(data), 2)
+
+if __name__ == '__main__':
+    unittest.main()
